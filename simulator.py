@@ -11,8 +11,8 @@ window = tk.Tk()
 canvas = tk.Canvas(master=window, width=1000, height=1000)
 
 for i in range(window_size):
-    canvas.create_line(0, 50*i, 1000, 50*i)
-    canvas.create_line(50*i, 0, 50*i, 1000)
+    canvas.create_line(0, reset_size*i, 1000, reset_size*i)
+    canvas.create_line(reset_size*i, 0, reset_size*i, 1000)
 
 canvas.pack()
 
@@ -28,7 +28,7 @@ for i in range(window_size):
 def draw_drop(size):
     for i in range(window_size):
         for j in range(window_size):
-            obj_ids[i][j] = canvas.create_oval(50*i - size[i][j], 50*j - size[i][j], 50*i + size[i][j], 50*j + size[i][j])
+            obj_ids[i][j] = canvas.create_oval(reset_size*i - size[i][j], reset_size*j - size[i][j], reset_size*i + size[i][j], reset_size*j + size[i][j])
 
 
 while 1:
@@ -37,9 +37,9 @@ while 1:
             canvas.delete(obj_ids[i][j])
             if(random.random() <= rain_rate):
                 drop_size[i][j] += drop_increase
-            if(drop_size[i][j] > 50):
+            if(drop_size[i][j] > reset_size):
                 s = 0
-                while(s + j < 20):
+                while(s + j < window_size):
                     drop_size[i][s + j] = 2
                     s += 1
     draw_drop(drop_size)
